@@ -1,6 +1,7 @@
-import { Box } from "grommet";
 import React from "react";
+import Grid from "@mui/material/Grid";
 import IndividualTally  from "./IndividualTally";
+import { useSelector } from "react-redux";
 
 const TotalTally = (props) => {
     
@@ -12,26 +13,22 @@ const TotalTally = (props) => {
     let recoveredCases = 0;
     let deathCases = 0;
 
-    props.statesData.forEach(s => {
-        totalCases += Number.parseInt(s.total_active);
-        recoveredCases += Number.parseInt(s.total_cured);
-        deathCases += Number.parseInt(s.total_deaths);
-    });
+    const data = useSelector(state => state.statesData.data);
+
+    if (data) {
+        data.forEach(s => {
+            totalCases += Number.parseInt(s.total_active);
+            recoveredCases += Number.parseInt(s.total_cured);
+            deathCases += Number.parseInt(s.total_deaths);
+        });
+    }
 
     return (
-        <Box direction="row"
-        pad="small"
-        >
-            <Box pad={"small"} basis="full">
-                <IndividualTally label={totalCasesLabel} count={totalCases} background="status-critical"/>
-            </Box>
-            <Box pad={"small"} basis="full">
-                <IndividualTally label={recoveredCasesLabel} count={recoveredCases} background="accent-1"/>
-            </Box>
-            <Box pad={"small"} basis="full">
-                <IndividualTally label={deathCasesLabel} count={deathCases} background="status-unknown"/>
-            </Box>
-        </Box>
+        <Grid container spacing={2} columnSpacing={2} sx={{p : 2}}>
+            <IndividualTally label={totalCasesLabel} count={totalCases}/>
+            <IndividualTally label={recoveredCasesLabel} count={recoveredCases}/>
+            <IndividualTally label={deathCasesLabel} count={deathCases}/>
+        </Grid>
     );
 }
 

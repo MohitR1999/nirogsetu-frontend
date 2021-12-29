@@ -1,51 +1,46 @@
 import './App.css';
-import { Grommet, Box, Grid} from 'grommet';
 import { useSelector, useDispatch } from 'react-redux';
 import * as ActionCreators from './config/actionCreators';
 import NirogHeader from './components/NirogHeader/NirogHeader';
 import TotalTally from './components/TotalTally/TotalTally';
 import StatewiseTally from './components/StatewiseTally/StatewiseTally';
 import MapOfIndia from './components/MapOfIndia/MapOfIndia';
+import { useEffect } from 'react';
 
-const theme = {
-  global: {
-    font: {
-      family: 'Source Code Pro',
-      size: '18px',
-      height: '20px'
-    }
-  }
-}
+import Box from '@mui/material/Box';
+import Grid from "@mui/material/Grid";
 
 function App() {
 
-    const statesData = useSelector(state => state.statesData.data);
-    const dispatch = useDispatch();
+  const statesData = useSelector(state => state.statesData.data);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(ActionCreators.fetchDataThunk());
+  }, []);
 
   return (
-    <Grommet theme={theme}>
-      <Grid
-        fill
-        rows={['auto', 'auto']}
-        columns={['flex', 'flex']}
-        areas={[
-          { name: 'header', start: [0, 0], end: [1, 0] },
-          { name: 'tally', start: [0, 1], end: [0, 1] },
-          { name: 'map', start: [1, 1], end: [1, 1] },
-        ]}
-      >
-        <Box gridArea="header" background="dark-1">
-          <NirogHeader/>
-        </Box>
-        <Box gridArea="tally" background="dark-1">
-          <TotalTally statesData={statesData}/>
-          <StatewiseTally statesData={statesData}/>
-        </Box>
-        <Box gridArea="map" background="dark-1">
+    <Box sx={{ flexGrow: 1 }}>
+      <NirogHeader />
+      <Grid container spacing={1}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <TotalTally />
+            </Grid>
+
+            <Grid item xs={12}>
+              <StatewiseTally />
+            </Grid>
+          </Grid>
+
+        </Grid>
+
+        <Grid item xs={12} sm={12} md={6} lg={6}>
           <MapOfIndia />
-        </Box>
+        </Grid>
       </Grid>
-    </Grommet>
+    </Box>
   );
 }
 

@@ -1,28 +1,28 @@
 import React from "react";
-import { Box, Heading } from 'grommet';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Typography from '@mui/material/Typography';
+import Grid from "@mui/material/Grid";
+import { CardActionArea } from "@mui/material";
 
 
 const IndividualTally = (props) => {
-    return (
-            <Box
-                direction="column"
-                pad="small"
-                align="center"
-                alignSelf="center"
-                basis="full"
-            >
-                <Box pad="small">
-                    <Heading level={3} color={props.background}>
-                        {props.count}
-                    </Heading>
-                </Box>
-                <Box>
-                    <Heading level={5} color={props.background}>
-                        {props.label}
-                    </Heading>
-                </Box>
-            </Box>
-    );
+  return (
+    <Grid item xs={12} sm={4} md={4} lg={4}>
+      <Card>
+        <CardActionArea>
+          <CardContent>
+            <Typography sx={{ mt: 2 }} variant="h5" component="div" align='center'>
+              {props.count}
+            </Typography>
+            <Typography sx={{ mb: 2 }} color="text.secondary" align='center'>
+              {props.label}
+            </Typography>
+          </CardContent>
+        </CardActionArea>
+      </Card>
+    </Grid>
+  );
 }
 
 export default IndividualTally;
