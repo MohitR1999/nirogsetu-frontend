@@ -6,13 +6,23 @@ import reportWebVitals from './reportWebVitals';
 import { Provider } from 'react-redux';
 import { configureStore } from './config/store';
 import * as serviceWorkerRegistration from './serviceWorkerRegistration';
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+const themeOptions = {
+  palette: {
+    mode : 'dark'
+  }
+};
+const theme = createTheme(themeOptions);
 
 const store = configureStore();
 
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>
-      <App />
+      <ThemeProvider theme={theme}>
+        <App />
+      </ThemeProvider>
     </Provider>
   </React.StrictMode>,
   document.getElementById('root')

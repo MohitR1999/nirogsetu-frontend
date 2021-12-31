@@ -9,22 +9,7 @@ import { useEffect } from 'react';
 
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
-
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-export const themeOptions = {
-  palette: {
-    type: 'dark',
-    primary: {
-      main: '#3f51b5',
-    },
-    secondary: {
-      main: '#f50057',
-    },
-  },
-};
-
-const theme = createTheme(themeOptions);
+import { Typography } from '@mui/material';
 
 function App() {
 
@@ -36,28 +21,26 @@ function App() {
   }, []);
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, bgcolor: 'background.default', height : '100%' }}>
       <NirogHeader />
-      <ThemeProvider theme={theme}>
-        <Grid container spacing={1}>
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <Grid container spacing={1}>
-              <Grid item xs={12}>
-                <TotalTally />
-              </Grid>
-
-              <Grid item xs={12}>
-                <StatewiseTally />
-              </Grid>
+      <Grid container spacing={1}>
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          <Grid container spacing={1}>
+            <Grid item xs={12}>
+              <TotalTally />
             </Grid>
 
+            <Grid item xs={12}>
+              <StatewiseTally />
+            </Grid>
           </Grid>
 
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <MapOfIndia />
-          </Grid>
         </Grid>
-      </ThemeProvider>
+
+        <Grid item xs={12} sm={12} md={6} lg={6}>
+          <MapOfIndia />
+        </Grid>
+      </Grid>
     </Box>
   );
 }
