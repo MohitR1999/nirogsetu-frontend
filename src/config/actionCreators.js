@@ -1,7 +1,7 @@
 import * as ACTION_TYPES from './actionTypes';
 
 export const fetchDataThunk = () => async (dispatch) => {
-    fetch('http://192.168.1.8:3000/', {mode : 'cors'}).then(res => {
+    fetch('http://192.168.1.6:3300/', {mode : 'cors', method : 'GET'}).then(res => {
         if (res.ok) {
             res.json().then(data => dispatch(updateData(data))).catch(err => console.log(err));
         } else {
