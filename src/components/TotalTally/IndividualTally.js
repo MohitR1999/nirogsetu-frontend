@@ -7,9 +7,19 @@ import { CardActionArea } from "@mui/material";
 
 
 const IndividualTally = (props) => {
+  
+  let color = '#242424';
+  if (props.label === 'Total Cases') {
+    color = 'rgba(255, 255, 69, 0.5)';
+  } else if (props.label === 'Total Recovered') {
+    color = 'rgba(69, 255, 69, 0.5)';
+  } else if (props.label === 'Total Deaths') {
+    color = 'rgba(255, 69, 69, 0.5)';
+  }
+
   return (
     <Grid item xs={12} sm={4} md={4} lg={4}>
-      <Card>
+      <Card sx={{ bgcolor : color}}>
         <CardActionArea>
           <CardContent>
             <Typography sx={{ mt: 2 }} variant="h5" component="div" align='center'>
