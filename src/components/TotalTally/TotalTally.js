@@ -16,11 +16,15 @@ const TotalTally = (props) => {
     const data = useSelector(state => state.statesData.data);
 
     if (data) {
+        const formatter = new Intl.NumberFormat('en-IN');
         data.forEach(s => {
             totalCases += Number.parseInt(s.total_active);
             recoveredCases += Number.parseInt(s.total_cured);
             deathCases += Number.parseInt(s.total_deaths);
         });
+        totalCases = formatter.format(totalCases);
+        recoveredCases = formatter.format(recoveredCases);
+        deathCases = formatter.format(deathCases);
     }
 
     return (

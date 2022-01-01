@@ -22,7 +22,7 @@ const IndividualTally = (props) => {
       <Card sx={{ bgcolor : color}}>
         <CardActionArea>
           <CardContent>
-            <Typography sx={{ mt: 2 }} variant="h5" component="div" align='center'>
+            <Typography sx={{ mt: 2 }} variant="h4" component="div" align='center'>
               {props.count}
             </Typography>
             <Typography sx={{ mb: 2 }} color="text.secondary" align='center'>
