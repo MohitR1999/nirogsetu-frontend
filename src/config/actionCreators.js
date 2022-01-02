@@ -1,7 +1,7 @@
 import * as ACTION_TYPES from './actionTypes';
 
 export const fetchDataThunk = () => async (dispatch) => {
-    fetch('http://192.168.1.7:3300/', {mode : 'cors', method : 'GET'}).then(res => {
+    fetch(`http://${process.env.REACT_APP_NIROGSETU_URL}:${process.env.REACT_APP_NIROGSETU_PORT}/`, {mode : 'cors', method : 'GET'}).then(res => {
         if (res.ok) {
             res.json().then(data => dispatch(updateData(data))).catch(err => console.log(err));
         } else {
@@ -15,7 +15,7 @@ export const fetchDataThunk = () => async (dispatch) => {
 }
 
 export const fetchVaccinationDataThunk = () => async (dispatch) => {
-    fetch('http://192.168.1.7:3300/vaccinated', {mode : 'cors', method : 'GET'}).then(res => {
+    fetch(`http://${process.env.REACT_APP_NIROGSETU_URL}:${process.env.REACT_APP_NIROGSETU_PORT}/vaccinated`, {mode : 'cors', method : 'GET'}).then(res => {
         if (res.ok) {
             res.json().then(data => dispatch(updateVaccinationData(data['totalVaccinated']))).catch(err => console.log(err));
         } else {
