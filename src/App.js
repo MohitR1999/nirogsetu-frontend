@@ -1,5 +1,5 @@
 import './App.css';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import * as ActionCreators from './config/actionCreators';
 import NirogHeader from './components/NirogHeader/NirogHeader';
 import TotalTally from './components/TotalTally/TotalTally';
@@ -9,14 +9,11 @@ import { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
 import Grid from "@mui/material/Grid";
-import ReactTooltip from 'react-tooltip';
-import { Backdrop, CircularProgress, Card, CardContent, Typography, CardActions, Button } from '@mui/material';
+import { Backdrop } from '@mui/material';
 
 function App() {
 
-  const statesData = useSelector(state => state.statesData.data);
   const dispatch = useDispatch();
-  const [content, setContent] = useState("");
 
   const [open, setOpen] = useState(false);
   const handleClose = () => {
@@ -53,10 +50,6 @@ function App() {
             </Grid>
           </Grid>
         </Grid>
-        {/* <Grid item xs={12} sm={12} md={6} lg={6}>
-          <MapOfIndia setToolTipContent={setContent}/>
-          <ReactTooltip>{content}</ReactTooltip>
-        </Grid> */}
       </Grid>
     </Box>
   );
