@@ -72,37 +72,29 @@ self.addEventListener('message', (event) => {
 // Any other custom service worker logic can go here.
 var CACHE_NAME = 'nirog-setu-cache';
 
-self.addEventListener('fetch', function(event) {
-  event.respondWith(
-    caches.match(event.request)
-      .then(function(response) {
-        // Cache hit - return response
-        if (response) {
-          return response;
-        }
+self.addEventListener('install', event => {
+  console.log(`${CACHE_NAME} installing...`);
+  event.waitUntil(
+    setInterval(() => {
+      console.log(`Clearing cache after 2 min`);
+      caches.delete(CACHE_NAME);
+    }, 1000*60*2)
+  );
+})
 
-        return fetch(event.request).then(
-          function(response) {
-            // Check if we received a valid response
-            if(!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
-
-            // IMPORTANT: Clone the response. A response is a stream
-            // and because we want the browser to consume the response
-            // as well as the cache consuming the response, we need
-            // to clone it so we have two streams.
-            var responseToCache = response.clone();
-
-            caches.open(CACHE_NAME)
-              .then(function(cache) {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        );
-      })
-    );
+self.addEventListener('activate', (e) => {
+  console.log(`Activated`);
 });
 
+self.addEventListener('fetch', (e) => {
+  e.respondWith((async () => {
+    const r = await caches.match(e.request);
+    console.log(`[Service Worker] Fetching resource: ${e.request.url}`);
+    if (r) { return r; }
+    const response = await fetch(e.request);
+    const cache = await caches.open(CACHE_NAME);
+    console.log(`[Service Worker] Caching new resource: ${e.request.url}`);
+    cache.put(e.request, response.clone());
+    return response;
+  })());
+});
