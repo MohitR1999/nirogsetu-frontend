@@ -5,7 +5,6 @@ import NirogHeader from './components/NirogHeader/NirogHeader';
 import TotalTally from './components/TotalTally/TotalTally';
 import StatewiseTally from './components/StatewiseTally/StatewiseTally';
 import DetailCard from './components/DetailCard/DetailCard';
-import MapOfIndia from './components/MapOfIndia/MapOfIndia';
 import { useEffect, useState } from 'react';
 
 import Box from '@mui/material/Box';
