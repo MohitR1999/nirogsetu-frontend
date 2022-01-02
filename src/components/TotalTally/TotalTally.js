@@ -8,12 +8,15 @@ const TotalTally = (props) => {
     const totalCasesLabel = "Total Cases";
     const recoveredCasesLabel = "Total Recovered";
     const deathCasesLabel = "Total Deaths";
+    const totalVaccinatedLabel = "Total Vaccinated";
     
     let totalCases = 0;
     let recoveredCases = 0;
     let deathCases = 0;
-
+    
     const data = useSelector(state => state.statesData.data);
+    const totalVaccinated = useSelector(state => state.totalVaccinated);
+     
 
     if (data) {
         const formatter = new Intl.NumberFormat('en-IN');
@@ -32,6 +35,7 @@ const TotalTally = (props) => {
             <IndividualTally label={totalCasesLabel} count={totalCases}/>
             <IndividualTally label={recoveredCasesLabel} count={recoveredCases}/>
             <IndividualTally label={deathCasesLabel} count={deathCases}/>
+            <IndividualTally label={totalVaccinatedLabel} count={totalVaccinated ? totalVaccinated : 0}/>
         </Grid>
     );
 }

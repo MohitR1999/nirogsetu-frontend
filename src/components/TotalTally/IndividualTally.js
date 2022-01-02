@@ -15,10 +15,12 @@ const IndividualTally = (props) => {
     color = 'rgba(69, 255, 69, 0.5)';
   } else if (props.label === 'Total Deaths') {
     color = 'rgba(255, 69, 69, 0.5)';
+  } else if (props.label === 'Total Vaccinated') {
+    color = 'rgba(69, 69, 255, 0.5)';
   }
 
   return (
-    <Grid item xs={12} sm={4} md={4} lg={4}>
+    <Grid item xs={12} sm={3} md={3} lg={3}>
       <Card sx={{ bgcolor : color}}>
         <CardActionArea>
           <CardContent>

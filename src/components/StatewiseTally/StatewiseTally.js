@@ -4,12 +4,7 @@ import { useDispatch } from "react-redux";
 import { fetchDataThunk } from '../../config/actionCreators';
 import { DataGrid, GridRowsProp, GridColDef } from '@mui/x-data-grid';
 import { Grid } from '@mui/material';
-
-const rows = [
-    { id: 1, col1: 'Hello', col2: 'World' },
-    { id: 2, col1: 'DataGridPro', col2: 'is Awesome' },
-    { id: 3, col1: 'MUI', col2: 'is Amazing' },
-];
+import * as ActionCreators from '../../config/actionCreators';
 
 const columns = [
     { field: 'name', headerName: 'State', flex : 4, minWidth: 150 ,description : 'Name of the state' },
@@ -28,7 +23,15 @@ const StatewiseTally = (props) => {
         <div style={{ height: 600, width: '100%' }}>
             <div style={{ display: 'flex', height: '100%' }}>
                 <div style={{ flexGrow: 1 }}>
-                    <DataGrid rows={statesData} columns={columns}/>
+                    <DataGrid 
+                    rows={statesData} 
+                    columns={columns}
+                    onCellClick={(params, event) => {
+                        console.log('Cell clicked!');
+                        dispatch(ActionCreators.updateSelectedState(params.row));
+                        props.handleToggle();
+                    }}
+                    />
                 </div>
             </div>
         </div>
